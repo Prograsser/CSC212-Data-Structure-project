@@ -15,6 +15,9 @@ public class LinkedList<T> {
         head=null;
         current=null;
     }
+    public void findFirst(){
+        current=head;
+    }
     public boolean empty(){
         return head==null;
     }
@@ -43,13 +46,20 @@ public class LinkedList<T> {
                 tmp.next=tmp.next;
             }
         if (current.next==null){
-            current=tmp;
+            current=head;
         }
         else{
             current=current.next;    
         }
     }
-
-
+    public int length(){
+        int count=0;
+        Node<T> tmp=head;
+        while (tmp!=null){
+            count++;
+            tmp=tmp.next;
+        }
+        return count;
+    }
 }
 
