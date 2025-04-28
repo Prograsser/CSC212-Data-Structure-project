@@ -61,7 +61,7 @@ public LinkedList<Photo> getPhotos(){ // this method will return the photos that
 	                                      //                                                                              a: a[0]    a[1]   
 	String a[] = condition.split("AND");  //.split it will cut from AND then replace AND with space ,ex:grass AND green --> grass    green
 	
-	for(int i =0; i < a.length; i++){     //                                                  a: a[0] | a[1]
+	for(int i =0; i < a.length; i++){     //                                                     a: a[0] | a[1]
 		a[i] = a[i].trim();               //.trim it will remove spaces and it will become -->  grass | green
 	}
 	
