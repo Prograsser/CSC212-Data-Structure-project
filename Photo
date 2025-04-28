@@ -1,13 +1,21 @@
+
 public class Photo {
-    privete String path;
-    privetw LinkedList<String> tags= new LinkedList<String>();
-    public Photo(String path, LinkedList<String> tags){
-        this.path = path;
-        this.tags = tags;
-    }
-    public String getPath(){
-        return path;
-    }
-    public LinkedList<String> getTags(){
-        return tags;}
-    }
+String path;
+LinkedList<String> tags;
+public Photo(String path, LinkedList<String> tags) {
+	this.path = path;
+	this.tags = tags;
+}
+public String getPath() {
+	return path;
+}
+public LinkedList<String> getTags(){
+	return tags;
+}
+//=====Helping methods========
+public void displayPhoto() {
+	System.out.println("Path ="+path);
+	System.out.print("tags is:");
+	tags.display();
+}
+}
