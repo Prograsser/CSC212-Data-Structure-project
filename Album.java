@@ -1,89 +1,100 @@
 
 public class Album {
-String name;
-String condition;
-PhotoManager manager;
-int nbcomp = 0; //Total Number of Comparison
-public Album(String name, String condition, PhotoManager manager) {
-	this.name = name;
-	this.condition = condition;
-	this.manager = manager;
-}
-public String getName() {
-	return name;
-}
-public String getCondition() {
-	return condition;
-}
-public PhotoManager getManager() {
-	return manager;
-}
+	private String name;
+	private String condition;
+	private PhotoManager manager;
+	private int totalNbcomp = 0; //Total Number of Comparison
 
-public boolean TagExist_inPhoto(LinkedList<String> l,String tag) {
-	if(l.empty())
+	// Constructor
+	public Album(String name, String condition, PhotoManager manager) {
+		this.name = name;
+		this.condition = condition;
+		this.manager = manager;
+	}
+
+	// Return the name of the album
+	public String getName() {
+		return name;
+	}
+
+	// Return the condition associated with the album
+	public String getCondition() {
+		return condition;
+	}
+
+	// Return the manager
+	public PhotoManager getManager() {
+		return manager;
+	}
+
+	// Return all photos that satisfy the album condition
+	public LinkedList<Photo> getPhotos() {
+
+		LinkedList<Photo> Photos = manager.getPhotos();
+		LinkedList<Photo> res = new LinkedList<>();
+
+		if (condition == null || Photos.empty())
+			return res;
+		if (condition.equals(""))
+			return Photos;
+		                                         //                                                                              a: a[0]    a[1]   
+		String cond[] = condition.split("AND"); //.split it will cut from AND then replace AND with space ,ex:grass AND green --> grass    green
+		for (int i = 0; i < cond.length; i++) {    //                                                 a: a[0] | a[1]
+			cond[i] = cond[i].trim();             //.trim it will remove spaces and it will become -->  grass | green
+		}
+
+		Photos.findFirst();
+		while (!Photos.empty()) {
+			if (IsTagsPartOfPhoto(cond, Photos.retrive().getTags())) //Calling method subset to check the tags if it satisfies the tags we will insert it in the album
+			{
+				res.insert(Photos.retrive());
+				Photos.findNext();
+			}
+		}
+		if (IsTagsPartOfPhoto(cond, Photos.retrive().getTags())) {
+			res.insert(Photos.retrive());
+		}
+		return res;
+	}
+
+	// Return the number of tag comparisons used to find all photos of the album
+	public int getNbComps() {
+		return totalNbcomp;
+	}
+	
+	// =====Helping methods========
+	// Check if the tag exist in photo, and compute the total number of comparisons
+	public boolean IsTagInPhoto(String tag, LinkedList<String> l) {
+		if (l.empty())
+			return false;
+		l.findFirst();
+		while (!l.last()) {
+			totalNbcomp++;
+			if (l.retrive().equals(tag)) {
+				System.out.println(tag + " Exist, total num of comp = " + totalNbcomp);
+				return true;
+			}
+		}
+
+		totalNbcomp++;
+		if (l.retrive().equals(tag)) {
+			System.out.println(tag + " Exist, total num of comp = " + totalNbcomp);
+			return true;
+		}
+		System.out.println(tag + " Does not Exist, total num of comp = " + totalNbcomp);
 		return false;
-	
-	l.findFirst();	
-	while(! l.last()) {
-		nbcomp++;
-		if(l.retrieve().equals(tag)) 			
-			 return true;		
-		l.findNext();
 	}
-	
-	nbcomp++;
-	if(l.retrieve().equals(tag))
+
+	// Check if the tags is a part of photo tag list
+	public boolean IsTagsPartOfPhoto(String[] tags, LinkedList<String> l) {  //tags is an array of tags & l is linkedlist of photos
+		if (l.empty())
+			return false;
+
+		for (int i = 0; i < tags.length; i++) {
+			if (!IsTagInPhoto(tags[i], l))  // Every index in the array having Tag so here it will check every tag if the tags is not in the linked list it will return false
+				return false;  // then ! will make it true so the "IsTagsPartOfPhoto" method will give us a false because this tag is not in the linked list
+		}
 		return true;
-      	
-	 return false;
-}
-
-public boolean subset(String [] a, LinkedList<String> l) {  //a is array stores tags & l is linkedlist of photos
-	if(a.length == 0)
-		return true; 
-	if(l.empty())
-		return false;     
-	
-	 for(int i =0; i<a.length; i++) {      
-		if(! TagExist_inPhoto(l,a[i]))  // Every index in the array having Tag so here it will check every tag if the tags is not in the linked list it will return false
-			return false;               // then ! it will make it true and the subset method will give us a false because this tag is not in the linked list
-	  }
-	 return true;
-   }
-
-public LinkedList<Photo> getPhotos(){ // this method will return the photos that meet with the condition of the album
-	LinkedList<Photo> allPhotos = manager.getPhotos();
-	LinkedList<Photo> album = new LinkedList<Photo>();
-	if(condition == null)                 
-		return album;
-	if(condition.equals(""))             
-		return allPhotos;
-	                                      //                                                                              a: a[0]    a[1]   
-	String a[] = condition.split("AND");  //.split it will cut from AND then replace AND with space ,ex:grass AND green --> grass    green
-	
-	for(int i =0; i < a.length; i++){     //                                                     a: a[0] | a[1]
-		a[i] = a[i].trim();               //.trim it will remove spaces and it will become -->  grass | green
 	}
-	
-	
-	if(allPhotos.empty())    
-		return album;
-	
-	allPhotos.findFirst();
-	while(! allPhotos.last()) {
-		
-		if(subset(a,allPhotos.retrieve().getTags()))  //Calling method subset to check the tags if it satisfies the tags we will insert it in the album
-			album.insert(allPhotos.retrieve());
-		
-		allPhotos.findNext();
-	}
-	if(subset(a,allPhotos.retrieve().getTags()))
-		album.insert(allPhotos.retrieve());
-	
-	return album;
-}
 
-public int getNbComps() {
-	return nbcomp;
-}
 }
