@@ -59,11 +59,11 @@ public class InvIndexAlbum {
 			return false;
 		l.findFirst();
 		while (!l.last()) {
-			if (l.retrive().path.equals(p.path))
+			if (l.retrieve().path.equals(p.path))
 				return true;
 			l.findNext();
 		}
-		if (l.retrive().path.equals(p.path))
+		if (l.retrieve().path.equals(p.path))
 			return true;
 
 		return false;
@@ -84,11 +84,11 @@ public class InvIndexAlbum {
 			return res;
 		a.findFirst();
 		while (true) {
-			if (!IsPhotoExist(res, a.retrive())) {
+			if (!IsPhotoExist(res, a.retrieve())) {
 				b.findFirst();
 				while (true) {
-					if (b.retrive().path.equals(a.retrive().path)) {
-						res.insert(a.retrive());
+					if (b.retrieve().path.equals(a.retrieve().path)) {
+						res.insert(a.retrieve());
 						break;
 					}
 					if (!b.last())
