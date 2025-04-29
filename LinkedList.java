@@ -46,7 +46,7 @@ public class LinkedList<T> {
 		current.data = e;
 	}
 
-	public T retrive() {
+	public T retrieve() {
 		return current.data;
 	}
 
