@@ -45,14 +45,14 @@ public class Album {
 
 		Photos.findFirst();
 		while (!Photos.empty()) {
-			if (IsTagsPartOfPhoto(cond, Photos.retrive().getTags())) //Calling method subset to check the tags if it satisfies the tags we will insert it in the album
+			if (IsTagsPartOfPhoto(cond, Photos.retrieve().getTags())) //Calling method subset to check the tags if it satisfies the tags we will insert it in the album
 			{
-				res.insert(Photos.retrive());
+				res.insert(Photos.retrieve());
 				Photos.findNext();
 			}
 		}
-		if (IsTagsPartOfPhoto(cond, Photos.retrive().getTags())) {
-			res.insert(Photos.retrive());
+		if (IsTagsPartOfPhoto(cond, Photos.retrieve().getTags())) {
+			res.insert(Photos.retrieve());
 		}
 		return res;
 	}
@@ -70,14 +70,14 @@ public class Album {
 		l.findFirst();
 		while (!l.last()) {
 			totalNbcomp++;
-			if (l.retrive().equals(tag)) {
+			if (l.retrieve().equals(tag)) {
 				System.out.println(tag + " Exist, total num of comp = " + totalNbcomp);
 				return true;
 			}
 		}
 
 		totalNbcomp++;
-		if (l.retrive().equals(tag)) {
+		if (l.retrieve().equals(tag)) {
 			System.out.println(tag + " Exist, total num of comp = " + totalNbcomp);
 			return true;
 		}
