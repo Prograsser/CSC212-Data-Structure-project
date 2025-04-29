@@ -21,7 +21,7 @@ public class PhotoManager {
     	
     	while(! allPhotos.last()){
     		
-    		if(allPhotos.retrieve().path.equals(path)) {
+    		if(allPhotos.retrive().path.equals(path)) {
     			
     			allPhotos.remove();
     			
@@ -30,7 +30,7 @@ public class PhotoManager {
     		else
     			allPhotos.findNext();
     	}
-    	if(allPhotos.retrieve().path.equals(path))  //Check Last Node
+    	if(allPhotos.retrive().path.equals(path))  //Check Last Node
     		allPhotos.remove();
     }
     
@@ -46,12 +46,12 @@ public class PhotoManager {
         
         while (!allPhotos.last()) {
         	
-            if (allPhotos.retrieve().path.equals(p.path))
+            if (allPhotos.retrive().path.equals(p.path))
                 return true;
             allPhotos.findNext();
         }
         
-        if (allPhotos.retrieve().path.equals(p.path)) //Check Last Node
+        if (allPhotos.retrive().path.equals(p.path)) //Check Last Node
             return true;
         
         return false;
