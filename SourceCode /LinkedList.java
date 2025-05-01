@@ -1,18 +1,3 @@
-public class Node<T> {
-	public T data;
-	public Node<T> next;
-
-	public Node() {
-		data = null;
-		next = null;
-	}
-
-	public Node(T val) {
-		data = val;
-		next = null;
-	}
-}
-
 public class LinkedList<T> {
 
 	private Node<T> head;
@@ -83,15 +68,18 @@ public class LinkedList<T> {
 		else
 			current = current.next;
 	}
-	 public int length(){
-	        int count=0;
-	        Node<T> tmp=head;
-	        while (tmp!=null){
-	            count++;
-	            tmp=tmp.next;
-	        }
-	        return count;
-	    }
+
+
+	public int length() {
+		int count = 0;
+		Node<T> tmp = head;
+		while (tmp != null) {
+			count++;
+			tmp = tmp.next;
+		}
+		return count;
+	}
+
 //helping Methods
 	public void displayList() {
 		Node<T> tmp = head;
@@ -102,7 +90,5 @@ public class LinkedList<T> {
 			tmp = tmp.next;
 		}
 	}
+
 }
-
-
-
