@@ -68,7 +68,6 @@ public class LinkedList<T> {
 	public void remove() {
 		if (current == head) {
 			head = head.next;
-			current = head;
 		} else {
 			Node<T> tmp = head;
 			while (tmp != current)
