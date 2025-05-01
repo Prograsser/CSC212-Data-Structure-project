@@ -32,7 +32,6 @@ public class Album {
 
 		LinkedList<Photo> Photos = manager.getPhotos();
 		LinkedList<Photo> res = new LinkedList<>();
-
 		if (condition == null || Photos.empty())
 			return res;
 		if (condition.equals(""))
@@ -48,8 +47,8 @@ public class Album {
 			if (IsTagsPartOfPhoto(cond, Photos.retrieve().getTags())) //Calling method subset to check the tags if it satisfies the tags we will insert it in the album
 			{
 				res.insert(Photos.retrieve());
-				Photos.findNext();
 			}
+			Photos.findNext();
 		}
 		if (IsTagsPartOfPhoto(cond, Photos.retrieve().getTags())) {
 			res.insert(Photos.retrieve());
