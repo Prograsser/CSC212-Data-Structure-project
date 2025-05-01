@@ -17,7 +17,7 @@ public void addPhoto(Photo p) {
 	tags.findFirst();
 	while(! tags.last()) {
 		String curTag = tags.retrieve();
-		boolean found = index.findkey(curTag);
+		boolean found = index.findKey(curTag);
 		if(! found) {
 			LinkedList<Photo> curPhotos = new LinkedList<Photo>();
 			curPhotos.insert(p);
