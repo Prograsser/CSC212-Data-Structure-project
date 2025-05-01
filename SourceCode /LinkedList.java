@@ -65,21 +65,23 @@ public class LinkedList<T> {
 		}
 	}
 
-	public void remove() {
+	public void remove () {
 		if (current == head) {
 			head = head.next;
-		} else {
-			Node<T> tmp = head;
-			while (tmp != current)
-				tmp = tmp.next;
-			tmp.next = current.next;
-
 		}
+		else {
+			Node<T> tmp = head;
+
+			while (tmp.next != current)
+				tmp = tmp.next;
+
+			tmp.next = current.next;
+		}
+
 		if (current.next == null)
 			current = head;
 		else
 			current = current.next;
-
 	}
 	 public int length(){
 	        int count=0;
