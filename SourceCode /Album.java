@@ -44,7 +44,7 @@ public class Album {
 		}
 
 		Photos.findFirst();
-		while (!Photos.empty()) {
+		while (!Photos.last()) {
 			if (IsTagsPartOfPhoto(cond, Photos.retrieve().getTags())) //Calling method subset to check the tags if it satisfies the tags we will insert it in the album
 			{
 				res.insert(Photos.retrieve());
@@ -74,6 +74,7 @@ public class Album {
 				System.out.println(tag + " Exist, total num of comp = " + totalNbcomp);
 				return true;
 			}
+			l.findNext();
 		}
 
 		totalNbcomp++;
@@ -87,7 +88,9 @@ public class Album {
 
 	// Check if the tags is a part of photo tag list
 	public boolean IsTagsPartOfPhoto(String[] tags, LinkedList<String> l) {  //tags is an array of tags & l is linkedlist of photos
-		if (l.empty())
+		if (tags.length == 0)
+			return true;
+		if(l.empty())
 			return false;
 
 		for (int i = 0; i < tags.length; i++) {
