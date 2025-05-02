@@ -144,23 +144,6 @@ public class BST<T> {
         return false; // Not found
     }
     
-    public int findKeySteps(String k) {
-    	int count = 0;
-        BSTNode<T> p = root;
-        
-        while (p != null) {
-            current = p;
-            if (k.compareTo(p.key) == 0) {
-                return count+1;
-            } else if (k.compareTo(p.key) < 0) {
-                p = p.left;
-            } else {
-                p = p.right;
-            }
-            count++;
-        }
-        return count;
-    }
     
     //return LinkedList with all tags in an Ascending Order.
     public LinkedList<String> getLL(){
