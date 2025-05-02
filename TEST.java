@@ -3,7 +3,7 @@ public class TEST {
 
 	public static void main(String[] args) {
 		// test1(); // Test Class Completed 100% for Photo & Photo Manger
-		// test2(); // BST Test Class
+		test2(); // BST Test Class
 
 	}
 
@@ -104,19 +104,29 @@ public class TEST {
 		Photo p8 = new Photo("raccoon.jpg", tags8);
 		manager.addPhoto(p7);
 		manager.addPhoto(p8);
-
-		manager.displayINORDER();
-		System.out.println("----------------------------");
-		manager.deletePhoto("raccoon.jpg");
-		manager.displayINORDER();
+		manager.addPhoto(p6);
+		manager.addPhoto(p5);
+		manager.addPhoto(p4);
+		manager.addPhoto(p3);
+		manager.addPhoto(p2);
+		manager.addPhoto(p1);
+		InvIndexAlbum album1 = new InvIndexAlbum("Album1", "grass AND animal AND bear", manager);
+		
+		displayPhotoList2(album1.getPhotos());
+		System.out.println(album1.getNbComps());
+		
+		//manager.displayINORDER();
 
 	}
 
 	public static void displayPhotoList1(LinkedList<Photo> l) { // Display Method
 		if (l == null)
 			System.out.println("Null List !");
-		else if (l.empty())
+		else if (l.empty()) {
 			System.out.println("Empty List !");
+			return;
+		}
+			
 		System.out.println(" < All Photos Are > ");
 		l.findFirst();
 		while (!l.last()) {
@@ -131,8 +141,11 @@ public class TEST {
 	public static void displayPhotoList2(LinkedList<Photo> l) { // Display Method
 		if (l == null)
 			System.out.println("Null List !");
-		else if (l.empty())
+		else if (l.empty()) {
 			System.out.println("Empty List !");
+			return;
+		}
+			
 		System.out.println(" < All Photos Are > ");
 		l.findFirst();
 		while (!l.last()) {
@@ -141,6 +154,7 @@ public class TEST {
 			// path
 			l.findNext();
 		}
+
 		System.out.println("\n " + l.retrieve().path);
 		// l.retrieve().displayPhoto();
 		System.out.println("-------------------");
