@@ -7,7 +7,7 @@ public class PhotoManager {
 
     public void addPhoto(Photo p) {
     	
-        if (PhotoExist(p))  // to prevent repeating, we create method "PhotoExist" to check if it's in the LinkedList of photos
+        if (isPhotoExist(p))  
         	return;              
         
         allPhotos.insert(p);
@@ -30,7 +30,7 @@ public class PhotoManager {
     		else
     			allPhotos.findNext();
     	}
-    	if(allPhotos.retrieve().path.equals(path))  //Check Last Node
+    	if(allPhotos.retrieve().path.equals(path))  
     		allPhotos.remove();
     }
     
@@ -38,8 +38,9 @@ public class PhotoManager {
     	return allPhotos;
     }
     
-    // ====== Helping Method =========
-    public boolean PhotoExist(Photo p) {
+    // ==Additional Methods== 
+    
+    public boolean isPhotoExist(Photo p) { //To avoid repetition, we created a method called "PhotoExist" to check if a photo is in the LinkedList of photos.
     	
         if (allPhotos.empty()) return false;
         allPhotos.findFirst();
@@ -51,7 +52,7 @@ public class PhotoManager {
             allPhotos.findNext();
         }
         
-        if (allPhotos.retrieve().path.equals(p.path)) //Check Last Node
+        if (allPhotos.retrieve().path.equals(p.path)) 
             return true;
         
         return false;
