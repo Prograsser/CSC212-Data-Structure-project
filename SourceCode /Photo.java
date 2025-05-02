@@ -12,7 +12,7 @@ public String getPath() {
 public LinkedList<String> getTags(){
 	return tags;
 }
-//=====Helping methods========
+// ==Additional methods==
 public void displayPhoto() {
 	System.out.println("Path ="+path);
 	System.out.print("tags is:");
