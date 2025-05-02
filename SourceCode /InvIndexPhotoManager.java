@@ -147,8 +147,11 @@ public class InvIndexPhotoManager {
 	public void displayPhotoList(LinkedList<Photo> l) { // Display Method
 		if (l == null)
 			System.out.println("Null List !");
-		else if (l.empty())
+		else if (l.empty()){
 			System.out.println("Empty List !");
+			return;
+		}
+			
 		System.out.println(" < All Photos Are > ");
 		l.findFirst();
 		while (!l.last()) {
