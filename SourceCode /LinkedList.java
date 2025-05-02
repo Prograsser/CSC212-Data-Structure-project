@@ -80,7 +80,7 @@ public class LinkedList<T> {
 		return count;
 	}
 
-//helping Methods
+// ==Additional Methods==
 	public void displayList() {
 		Node<T> tmp = head;
 		if (empty())
