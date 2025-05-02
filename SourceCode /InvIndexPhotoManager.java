@@ -1,10 +1,10 @@
 
 public class InvIndexPhotoManager {
-	BST<LinkedList<Photo>> index;
+	BST<LinkedList<Photo>> TagsBST;
 	LinkedList<Photo> allPhotos;
 
 	public InvIndexPhotoManager() {
-		index = new BST<LinkedList<Photo>>();
+		TagsBST = new BST<LinkedList<Photo>>();
 		allPhotos = new LinkedList<Photo>();
 	}
 
@@ -13,31 +13,32 @@ public class InvIndexPhotoManager {
 			return;
 		allPhotos.insert(p);
 		LinkedList<String> tags = p.getTags();
+		
 		if (tags.empty())
 			return;
 		tags.findFirst();
 		while (!tags.last()) {
 			String curTag = tags.retrieve();
-			boolean found = index.findKey(curTag);
+			boolean found = TagsBST.findKey(curTag);
 			if (!found) {
 				LinkedList<Photo> curPhotos = new LinkedList<Photo>();
 				curPhotos.insert(p);
-				index.insert(curTag, curPhotos);
+				TagsBST.insert(curTag, curPhotos);
 			} else {
-				LinkedList<Photo> curPhotos = index.retrieve();
+				LinkedList<Photo> curPhotos = TagsBST.retrieve();
 				curPhotos.insert(p);
 			}
 			tags.findNext();
 		}
-		// For Last Element
+		
 		String curTag = tags.retrieve();
-		boolean found = index.findKey(curTag);
+		boolean found = TagsBST.findKey(curTag);
 		if (!found) {
-			LinkedList<Photo> curPhotos = new LinkedList<Photo>();
-			curPhotos.insert(p);
-			index.insert(curTag, curPhotos);
+			LinkedList<Photo> curPhotos = new LinkedList<Photo>(); 
+			curPhotos.insert(p);   
+			TagsBST.insert(curTag, curPhotos);
 		} else {
-			LinkedList<Photo> curPhotos = index.retrieve();
+			LinkedList<Photo> curPhotos = TagsBST.retrieve();  //already this tag is there in the TagsBST and we will insert it to the linked list inside The Node Tag
 			curPhotos.insert(p);
 		}
 	}
@@ -56,7 +57,7 @@ public class InvIndexPhotoManager {
 			list.findNext();
 		}
 
-		// Also check the last item
+		
 		Photo lastPhoto = list.retrieve();
 		if (lastPhoto != null && lastPhoto.path.equals(target.path)) {
 			list.remove();
@@ -76,7 +77,7 @@ public class InvIndexPhotoManager {
 				allPhotos.remove();
 				break;
 			}
-			allPhotos.findNext(); // FIND THE TAG'S and store it inside LL tags
+			allPhotos.findNext(); 
 		}
 		if (allPhotos.retrieve().path.equals(path)) {
 			tags = allPhotos.retrieve().tags;
@@ -88,26 +89,27 @@ public class InvIndexPhotoManager {
 		Photo ourPhoto = new Photo(path, tags);
 		tags.findFirst();
 		while (!tags.last()) {
-			if (index.findKey(tags.retrieve())) {
-				removeFromList(index.retrieve(), ourPhoto);
-				if (index.retrieve().empty())
-					index.removeKey(tags.retrieve());
+			if (TagsBST.findKey(tags.retrieve())) {
+				removeFromList(TagsBST.retrieve(), ourPhoto);
+				if (TagsBST.retrieve().empty())
+					TagsBST.removeKey(tags.retrieve());
 			}
 			tags.findNext();
 		}
-		if (index.findKey(tags.retrieve())) {
-			removeFromList(index.retrieve(), ourPhoto);
-			if (index.retrieve().empty())
-				index.removeKey(tags.retrieve());
+		if (TagsBST.findKey(tags.retrieve())) {
+			removeFromList(TagsBST.retrieve(), ourPhoto);
+			if (TagsBST.retrieve().empty())
+				TagsBST.removeKey(tags.retrieve());
 		}
 	}
 
 	public BST<LinkedList<Photo>> getPhotos() {
-		return index;
+		return TagsBST;
 	}
 
-//Additional Method's
-	public boolean PhotoExist(Photo p) {
+// ==Additional Methods==
+	
+	public boolean PhotoExist(Photo p) { 
 
 		if (allPhotos.empty())
 			return false;
@@ -120,17 +122,17 @@ public class InvIndexPhotoManager {
 			allPhotos.findNext();
 		}
 
-		if (allPhotos.retrieve().path.equals(p.path)) // Check Last Node
+		if (allPhotos.retrieve().path.equals(p.path)) 
 			return true;
 
 		return false;
 	}
 
 	public void displayINORDER() {
-		if (index.empty())
+		if (TagsBST.empty())
 			System.out.println("empty tree");
 		else
-			inorder(index.getRoot());
+			inorder(TagsBST.getRoot());
 	}
 
 	private void inorder(BSTNode<LinkedList<Photo>> p) {
@@ -150,13 +152,11 @@ public class InvIndexPhotoManager {
 		System.out.println(" < All Photos Are > ");
 		l.findFirst();
 		while (!l.last()) {
-			System.out.println("\n " + l.retrieve().path);
-			// l.retrieve().displayPhoto(); ---> This will display photo details; tags &
-			// path
+			System.out.println("\n " + l.retrieve().path);					
 			l.findNext();
 		}
 		System.out.println("\n " + l.retrieve().path);
-		// l.retrieve().displayPhoto();
+		
 		System.out.println("-------------------");
 	}
 }
