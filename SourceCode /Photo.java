@@ -16,6 +16,6 @@ public LinkedList<String> getTags(){
 public void displayPhoto() {
 	System.out.println("Path ="+path);
 	System.out.print("tags is:");
-	tags.display();
+	tags.displayList();
 }
 }
