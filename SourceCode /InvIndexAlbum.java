@@ -28,7 +28,7 @@ public class InvIndexAlbum {
 	
 	// Returns the number of tag comparisons performed when retrieving photos
 		public int getNbComps() {
-			return manager.index.getNum_comp();
+			return manager.TagsBST.getNum_comp();
 		}
 
 	// Return all photos that satisfy the album condition
