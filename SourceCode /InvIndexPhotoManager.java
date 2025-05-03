@@ -13,7 +13,6 @@ public class InvIndexPhotoManager {
 			return;
 		allPhotos.insert(p);
 		LinkedList<String> tags = p.getTags();
-		
 		if (tags.empty())
 			return;
 		tags.findFirst();
@@ -30,15 +29,15 @@ public class InvIndexPhotoManager {
 			}
 			tags.findNext();
 		}
-		
+		// For Last Element
 		String curTag = tags.retrieve();
 		boolean found = TagsBST.findKey(curTag);
 		if (!found) {
-			LinkedList<Photo> curPhotos = new LinkedList<Photo>(); 
-			curPhotos.insert(p);   
+			LinkedList<Photo> curPhotos = new LinkedList<Photo>();
+			curPhotos.insert(p);
 			TagsBST.insert(curTag, curPhotos);
 		} else {
-			LinkedList<Photo> curPhotos = TagsBST.retrieve();  //already this tag is there in the TagsBST and we will insert it to the linked list inside The Node Tag
+			LinkedList<Photo> curPhotos = TagsBST.retrieve();
 			curPhotos.insert(p);
 		}
 	}
@@ -57,7 +56,7 @@ public class InvIndexPhotoManager {
 			list.findNext();
 		}
 
-		
+		// Also check the last item
 		Photo lastPhoto = list.retrieve();
 		if (lastPhoto != null && lastPhoto.path.equals(target.path)) {
 			list.remove();
@@ -77,7 +76,7 @@ public class InvIndexPhotoManager {
 				allPhotos.remove();
 				break;
 			}
-			allPhotos.findNext(); 
+			allPhotos.findNext(); // FIND THE TAG'S and store it inside LL tags
 		}
 		if (allPhotos.retrieve().path.equals(path)) {
 			tags = allPhotos.retrieve().tags;
@@ -107,9 +106,8 @@ public class InvIndexPhotoManager {
 		return TagsBST;
 	}
 
-// ==Additional Methods==
-	
-	public boolean PhotoExist(Photo p) { 
+//Additional Method's
+	public boolean PhotoExist(Photo p) {
 
 		if (allPhotos.empty())
 			return false;
@@ -122,7 +120,7 @@ public class InvIndexPhotoManager {
 			allPhotos.findNext();
 		}
 
-		if (allPhotos.retrieve().path.equals(p.path)) 
+		if (allPhotos.retrieve().path.equals(p.path)) // Check Last Node
 			return true;
 
 		return false;
@@ -147,19 +145,18 @@ public class InvIndexPhotoManager {
 	public void displayPhotoList(LinkedList<Photo> l) { // Display Method
 		if (l == null)
 			System.out.println("Null List !");
-		else if (l.empty()){
+		else if (l.empty())
 			System.out.println("Empty List !");
-			return;
-		}
-			
 		System.out.println(" < All Photos Are > ");
 		l.findFirst();
 		while (!l.last()) {
-			System.out.println("\n " + l.retrieve().path);					
+			System.out.println("\n " + l.retrieve().path);
+			// l.retrieve().displayPhoto(); ---> This will display photo details; tags &
+			// path
 			l.findNext();
 		}
 		System.out.println("\n " + l.retrieve().path);
-		
+		// l.retrieve().displayPhoto();
 		System.out.println("-------------------");
 	}
 }
